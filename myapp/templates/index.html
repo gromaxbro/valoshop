@@ -1,0 +1,69 @@
+{% extends  "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/index.css">
+{% endblock %}
+
+
+
+{% block content %}
+    <main>
+        <div class="img-box">
+            <div class="img-text">
+                <div class="inner-text">
+                    Buy Skinned Valorant Accounts
+                </div> 
+                <div class="inner-text2">
+                    Unlock premium Valorant accounts instantly, we've got secure.
+                </div>                 
+                <div class="inner-button"><button id="br-button">Browse Skins</button></div>
+            </div>
+        </div>
+
+    
+        <section class="featured-section">
+            <h2 class="section-title">Featured Skins / Offers</h2>
+            
+  <div class="cards">
+    {% for skin in gd %}
+  <div class="card" data-id="{{skin.id}}">
+    <div class="card-image">
+      <img src="imgs/{{ skin.image }}" alt="card image" />
+    </div>
+    <div class="card-detail">
+      <h3>{{skin.name}}</h3>
+      <p class="description">{{skin.description}}</p>
+      <div class="bottom-detail">
+        <p class="color">6 colors</p>
+        <p class="price">{{ skin.price }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  </div>
+            <a href="/store" class="view-all-btn">View All Skins</a>
+          </section>
+          
+
+          <section class="trust-section">
+            <h2>Why Buy From Us?</h2>
+            <ul class="trust-points">
+              <li>✅ Instant delivery</li>
+              <li>✅ 100% legit skins</li>
+              <li>✅ Trusted seller</li>
+              <li>✅ Fast support on Discord</li>
+            </ul>
+          </section>
+          
+          <section class="testimonials">
+            <h2>Customer Reviews</h2>
+            <p class="subtext">Real feedback from our satisfied buyers!</p>
+            <div class="testimonial-gallery">
+              <img src="/imgs/rev1.jpg" alt="Instagram testimonial 1" />
+              <img src="/imgs/rev2.jpg" alt="Instagram testimonial 2" />
+              <img src="/imgs/rev3.jpg" alt="Instagram testimonial 3" />
+            </div>
+          </section>
+          
+{% endblock %}

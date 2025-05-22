@@ -1,0 +1,462 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+nav{
+    position: fixed;
+    display: grid;
+    grid-template-columns: 60vw 35vw;
+    background: linear-gradient(90deg, #3a0d0d 0%, #3a0d0d 75%, #121212 100%);
+    height: 95px;
+    width: 99vw;
+    color: #ffffff;
+    z-index: 1000;
+
+  
+}
+
+#logo img{
+    padding: 10px;
+    margin-top: 6px;
+    margin-left: 60px;
+    cursor: pointer;
+
+}
+
+.navs{
+    width: 35vw;
+    height: 100%;
+    display:inline-flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    margin-left: 28.2px;
+    
+}
+
+.navs li{
+    padding-left: 1vw;
+    padding-right: 1vw;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight:500;
+
+}
+
+
+.navs li a {
+  text-decoration: none;
+  color: #eee;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.navs li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  transform: translateY(-2px);
+}
+
+.navs li:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  
+    
+
+}
+
+.img-box{
+    width: 99vw;
+    height: 100vh;
+    /* background-color:#121212; */
+    background: url("back.jpeg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main {
+  /* width: 100vw; */
+  background-color: #121212;
+  padding-top: 200px;
+  padding-bottom: 60px; /* extra space before footer */
+}
+
+.img-text {
+    padding-top: 180px;
+    /* background: rgba(0, 0, 0, 0.5); */
+    color: white;
+    text-align: center;
+  
+    /* Animation properties */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  
+  .img-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+.inner-text{
+    font-size: 2.6rem; /* Bold size */
+    font-weight: 900;
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color:	#f0f0f0; /* Valorant red */
+    text-align: center;
+    text-shadow: 
+      0 0 10px rgba(161, 161, 161, 0.4),
+      0 0 20px rgba(152, 152, 152, 0.2);
+  
+  
+}
+.inner-text2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #f0f0f0;
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .sidenavs{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    z-index: 999;
+    background: linear-gradient(90deg, #3a0d0d 0%, #3a0d0d 75%, #121212 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    display: none;
+  }
+  
+  .sidenavs li{
+    padding-left: 1vw;
+    padding-right: 1vw;
+    list-style: none;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight:500;
+    margin-top: 30px;
+  
+  }
+  
+  .sidenavs  li a {
+    text-decoration: none;
+    color: #eee;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  .menu-bt{
+    display: none;
+  }
+  @media (max-width:800px) {
+    .hideon{
+      display: none;
+    }
+    .menu-bt{
+      display: block;
+    }
+  }
+
+
+  .loadd{
+    width: 100%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+  }
+  #load-more {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: #ff4655;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  #load-more:hover {
+    background-color: #e03d4f;
+    transform: scale(1.05);
+  }
+  
+  
+  
+/* $$$$$$$$$$$$$$$$$$$cards */
+
+.cards{
+    display: flex;
+    /* width: 96vw; */
+    /* padding-left: 3vw; */
+    /* height: 990vh; */
+    flex-wrap: wrap;
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 26px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .card {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(255, 70, 85, 0.3);
+    color: #eee;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 70, 85, 0.7);
+  }
+  
+  .card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #ff4655;
+  }
+  
+  .card-detail {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-detail h3 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #ff4655;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  
+  .description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+  
+  .bottom-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Rajdhani', sans-serif;
+  }
+  
+  .color {
+    color: #bbb;
+    font-size: 0.85rem;
+  }
+  
+  .price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ff4655;
+  }
+  
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ fooster */
+  .footer {
+    background-color: #0e0e12;
+    color: #ccc;
+    padding: 40px 20px 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .footer-brand h2 {
+    font-size: 28px;
+    color: #fff;
+  }
+  
+  .footer-brand span {
+    color: #ff4655; /* Valorant red accent */
+  }
+  
+  .footer-brand p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 50px;
+    margin-top: 20px;
+  }
+  
+  .footer-links h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+  }
+  
+  .footer-links ul li {
+    margin-bottom: 6px;
+  }
+  
+  .footer-links ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .footer-links ul li a:hover {
+    color: #ff4655;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 13
+  }
+
+
+
+.back-btn, .buy-btn {
+background-color: #ff4655;
+border: none;
+padding: 12px 24px;
+color: white;
+font-weight: 600;
+border-radius: 10px;
+cursor: pointer;
+font-family: 'Rajdhani', sans-serif;
+transition: background 0.3s;
+}
+
+.back-btn:hover, .buy-btn:hover {
+background-color: #e23b48;
+}
+.mainer {
+  min-height: 100vh;
+  padding: 60px 5vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  background: #111; /* Dark gamer theme */
+  gap: 50px;
+  color: #fff;
+  }
+  
+  .mainer_img {
+  flex: 1 1 45%;
+  max-width: 600px;
+  }
+  
+  .mainer_img img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(255, 70, 85, 0.6);
+  object-fit: cover;
+  }
+  
+  .mainer_mainer {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  }
+  
+  .mainer_title {
+  font-size: 3.2rem;
+  color: #ff4655;
+  font-family: 'Rajdhani', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  }
+  
+  .mainer_description {
+  font-size: 1.2rem;
+  white-space: pre-line;
+
+  font-family: 'Poppins', sans-serif;
+  color: #ccc;
+  line-height: 1.6;
+  }
+  
+  .skin-meta {
+  display: flex;
+  gap: 30px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  }
+  
+  .color-tag,
+  .price-tag {
+  background: #222;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid #ff46557c;
+  }
+  
+  .skin-buttons {
+  display: flex;
+  gap: 25px;
+  margin-top: 10px;
+  }
+  
+  .back-btn,
+  .buy-btn {
+  background-color: #ff4655;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  }
+  
+  .back-btn:hover,
+  .buy-btn:hover {
+  background-color: #e23b48;
+  }

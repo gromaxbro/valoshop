@@ -1,0 +1,33 @@
+
+{% extends  "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="mainer">
+  
+<div class="mainer_img"><img src="/imgs/{{mylist.image}}"></div>
+<div class="mainer_mainer">
+<div class="mainer_title">{{mylist.name}}</div>
+        <p class="price" style="font-size: 30px;">{{ mylist.price }}</p>
+
+<div class="mainer_description">
+    {{ mylist['big-description'] | replace('\n', '<br>') | safe }}
+  </div>
+  
+  <div class="do-buttons">
+    <a href="/store"><button class="back-btn">⬅ Back</button></a>
+    <a href="https://wa.me/919111076398" target="_blank">
+      <button class="buy-btn">Buy on WhatsApp</button>
+    </a>
+  </div>
+</div>
+
+</div>
+{% endblock %}

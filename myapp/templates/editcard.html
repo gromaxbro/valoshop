@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Editable Cards with Flask Sync</title>
+<style>
+  /* ... same CSS from previous example ... */
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  #cardsList {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  .card img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  .card-content {
+    flex-grow: 1;
+  }
+  .card-content h3,
+  .card-content p,
+  .card-content small {
+    margin: 5px 0;
+  }
+  .edit-btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  .edit-btn:hover {
+    background-color: #0056b3;
+  }
+  #addCardBtn {
+    display: block;
+    margin: 20px auto;
+    background-color: #28a745;
+    padding: 10px 18px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #addCardBtn:hover {
+    background-color: #1e7e34;
+  }
+  .field-row {
+    display: flex;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Editable Cards List</h1>
+
+<div id="cardsList"></div>
+
+<button id="addCardBtn">+ Add New Card</button>
+
+<script>
+  let cardsData = [];
+
+  const cardsList = document.getElementById('cardsList');
+
+  // Fetch cards from server on load
+  async function loadCards() {
+    const res = await fetch('/get_cards');
+    if (res.ok) {
+      cardsData = await res.json();
+      renderCards();
+    } else {
+      alert('Failed to load cards from server');
+    }
+  }
+
+  // Send updated cards to server
+  async function saveCards() {
+    const res = await fetch('/update_cards', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cardsData)
+    });
+    if (!res.ok) {
+      alert('Failed to save cards');
+    }
+  }
+
+  function renderCards() {
+    cardsList.innerHTML = '';
+    cardsData.forEach((card, index) => {
+      const cardDiv = document.createElement('div');
+      cardDiv.className = 'card';
+
+      const img = document.createElement('img');
+      img.src = card.image;
+      img.alt = card.title;
+
+      const imgEditBtn = document.createElement('button');
+      imgEditBtn.textContent = 'Edit Image';
+      imgEditBtn.className = 'edit-btn';
+      imgEditBtn.onclick = async () => {
+        const newUrl = prompt('Edit image URL:', card.image);
+        if (newUrl && newUrl.trim() !== '') {
+          card.image = newUrl.trim();
+          await saveCards();
+          renderCards();
+        }
+      };
+
+      const imgContainer = document.createElement('div');
+      imgContainer.style.display = 'flex';
+      imgContainer.style.flexDirection = 'column';
+      imgContainer.style.alignItems = 'center';
+      imgContainer.appendChild(img);
+      imgContainer.appendChild(imgEditBtn);
+
+      const titleRow = document.createElement('div');
+      titleRow.className = 'field-row';
+      const title = document.createElement('h3');
+      title.textContent = card.title;
+      const titleEditBtn = document.createElement('button');
+      titleEditBtn.textContent = 'Edit Title';
+      titleEditBtn.className = 'edit-btn';
+      titleEditBtn.onclick = async () => {
+        const newTitle = prompt('Edit title:', card.title);
+        if (newTitle && newTitle.trim() !== '') {
+          card.title = newTitle.trim();
+          await saveCards();
+          renderCards();
+        }
+      };
+      titleRow.appendChild(title);
+      titleRow.appendChild(titleEditBtn);
+
+      const descRow = document.createElement('div');
+      descRow.className = 'field-row';
+      const desc = document.createElement('p');
+      desc.textContent = card.description;
+      const descEditBtn = document.createElement('button');
+      descEditBtn.textContent = 'Edit Description';
+      descEditBtn.className = 'edit-btn';
+      descEditBtn.onclick = async () => {
+        const newDesc = prompt('Edit description:', card.description);
+        if (newDesc && newDesc.trim() !== '') {
+          card.description = newDesc.trim();
+          await saveCards();
+          renderCards();
+        }
+      };
+      descRow.appendChild(desc);
+      descRow.appendChild(descEditBtn);
+
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'card-content';
+      contentDiv.appendChild(titleRow);
+      contentDiv.appendChild(descRow);
+
+      cardDiv.appendChild(imgContainer);
+      cardDiv.appendChild(contentDiv);
+
+      cardsList.appendChild(cardDiv);
+    });
+  }
+
+  document.getElementById('addCardBtn').addEventListener('click', async () => {
+    cardsData.push({
+      image: 'https://cdn-icons-png.flaticon.com/512/1828/1828817.png',
+      title: 'New Account Title',
+      description: 'Add description here...'
+    });
+    await saveCards();
+    renderCards();
+  });
+
+  loadCards();
+</script>
+
+</body>
+</html>

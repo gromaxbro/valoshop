@@ -1,0 +1,93 @@
+{% extends  "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="cards" id="card-container">
+  {% for skin in mylist %}
+  <div class="card" data-id="{{skin.id}}">
+    <div class="card-image">
+      <img src="imgs/{{ skin.image }}" alt="card image" />
+    </div>
+    <div class="card-detail">
+      <h3>{{skin.name}}</h3>
+      <p class="description">{{skin.description}}</p>
+      <div class="bottom-detail">
+        <p class="color">6 colors</p>
+        <p class="price">{{ skin.price }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="loadd">
+<button id="load-more">Load More</button>
+</div>
+
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+  let offset = 6;
+
+  const loadMoreBtn = document.getElementById("load-more");
+  const cardContainer = document.getElementById("card-container");
+
+  if (!loadMoreBtn || !cardContainer) return;
+
+  loadMoreBtn.addEventListener("click", function () {
+    fetch(`/store?offset=${offset}&ajax=1`)
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach((skin) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.setAttribute("data-id", skin.id);
+          card.innerHTML = `
+            <div class="card-image">
+              <img src="imgs/${skin.image}" alt="card image" />
+            </div>
+            <div class="card-detail">
+              <h3>${skin.name}</h3>
+              <p class="description">${skin.description}</p>
+              <div class="bottom-detail">
+                <p class="color">6 colors</p>
+                <p class="price">${skin.price}</p>
+              </div>
+            </div>
+          `;
+          cardContainer.appendChild(card);
+        });
+
+        offset += 6;
+        if (data.length < 6) {
+          loadMoreBtn.style.display = "none";
+        }
+      });
+  });
+
+  // Card click using delegation
+  cardContainer.addEventListener("click", function (e) {
+    const card = e.target.closest('.card');
+    if (card) {
+      const id = card.getAttribute('data-id');
+      if (id) {
+        window.location.href = `/details/${id}`;
+      }
+    }
+  });
+
+  // Logo click
+  const logoImg = document.querySelector("#logo img");
+  if (logoImg) {
+    logoImg.addEventListener("click", function () {
+      document.location = "/";
+    });
+  }
+});
+
+  </script>
+      
+{% endblock %}
